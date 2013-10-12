@@ -1,101 +1,88 @@
 ansible-elasticsearch
 =====================
 
-ansibleを使って、ログデータの収集と全文検索可能なマシンを構築します。  
-以下のソフトウェアをインストールします。  
-elasticsearch…ログデータのリアルタイム全文検索・分析エンジン  cool. bonsai cool  
-kibana3…ログの可視化ソフトウェア  
-fluentd…ログデータの収集ソフトウェア  
+项目目的：通过ansible实现fluentd+es+kibana架构的实现  
+elasticsearch...开源分布式搜索引擎  cool  
+kibana3...日志分析，可视化接口  
+fluentd...日志收集系统 
 
-ansible...サーバ構成管理ソフトウェア  
+ansible...自动化管理工具  
 
 対象環境
 -----
-CentOS 6.4 64bit   (virtualbox + vagrantで構築)
+CentOS 5.8 64bit 
 
-実行環境
+服务器端环境
 -----
-	$ ansible --version  
-	ansible 1.2.2
+    $ ansible --version  
+    ansible 1.4
 
-	$ ruby -v  
-	ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin11.4.2]
+    $ ruby -v  
+    ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin11.4.2]
 
-	$ gem list |grep serverspec  
-	serverspec (0.7.12)
+    $ gem list |grep serverspec  
+    serverspec (0.7.12)
 
-インストールするもの
+使用工具
 ------
 + elasticsearch  
- - plugin bigdesk  
- - plugin head  
+ - plugin bigdesk --集群监控工具 
+ - plugin head    --集群管理工具
 + kibana3
 + fluentd
 + nginx
 
-使い方
+使用方法
 -----
-1. hostsファイルの設定変更  
-clone後、hostsファイル内の対象サーバのIPアドレスを変更してください。
+1. 修改hosts  
+git clone之后记得修改hosts文件里的主机IP
 
-2. SSH公開鍵認証の準備  
-対象サーバにSSH公開鍵認証方式でログイン出来るように準備してください。
+2. SSH秘钥 
+客户端和服务器端密钥进行认证
 
-3. ホスト名の変更  
-サーバのホスト名を初期値es-server以外にする場合は、注意点1を参照し、  
-あらかじめ変更してください。
+3. es-server赋值
+在/etc/hosts里面手动绑定es-server IP,一般绑定为服务器端IP
 
-4. ansible playbook 実行  
-次のコマンドで実行します。  
+4. ansible playbook 执行  
+执行命令如下：  
 ```
 $ ansible-playbook setup.yml -i hosts  
 ```
 
-たまにyumで失敗することがありますが再度実行するとうまくいくことがあります。
+当出现yum失败时 请重新执行命令。
 
-5. テストの準備  
-Serverspecで行います。  
-spec/default をspec/xxx.xxx.xxx.xxxと変更してください。
+5. 编写测试  
+  
+spec/default spec/xxx.xxx.xxx.xxx 请按此规格变更。
 
-6. テストの実行  
-次のコマンドで実行します。  
+6. 运行测试  
+运行如下命令：  
 ```
 $ rake spec
 ```
 
-7. 再起動  
-ここで一度再起動してください。
-
-8. kibana3へのアクセス  
-次のURLでアクセスできます。  
+7. kibana3访问地址  
 ```
-http://IPアドレス/  
+http://IP/  
 ```
 
-画面上部に次のエラーがでますが、elasticsearch上にデータがないとでるようです。  
+9. elasticsearch的集群监控工具bigdesk访问地址 
+  
 ```
-Error Could not find http://192.168.0.109:9200/_all/_mapping. If you are using a proxy, ensure it is configured correctly
-```
-
-9. elasticsearchのプラグインbigdeskへのアクセス  
-次のURLでアクセスできます。  
-```
-http://IPアドレス:9200/_plugin/bigdesk  
+http://IP地址:9200/_plugin/bigdesk  
 ```
 
-10. elasticsearchのプラグインheadへのアクセス  
-次のURLでアクセスできます。  
-```	
-http://IPアドレス:9200/_plugin/head  
+10. elasticsearch的集群管理工具head的访问地址  
+  
+``` 
+http://IP地址:9200/_plugin/head  
 ```
 
 注意点
 -----
-1. サーバホスト名のハードコード  
-いくつかの設定ファイルにサーバのホスト名をハードコードしています。  
-(ホスト名未設定の場合にkibanaにうまくアクセスが出来ずハマりました。)  
-実際に動かす際には、環境に合わせて変えてください。  
-初期値ではes-serverです。  
+1. es-server  
+在/etc/hosts记得手动绑定IP地址
+  
 ```
 $ find ./  |xargs grep -n es-server  
 ./roles/es/templates/elasticsearch.yml:202:    network.bind_host: es-server  
@@ -104,12 +91,10 @@ $ find ./  |xargs grep -n es-server
 ./roles/kibana/vars/main.yml:3:                 servername: es-server  
 ```
 
-2. fluntdの収集先  
-初期設定では、fluentdのログ収集先は/var/log/nginx/access.logにしています。  
-つまり、構築後にkibanaに何度かアクセスすると、elascticsearchにログが保存されます。  
-動作確認用なので、早めに設定を変えてください。  
+2. fluntd收集对象  
+本项目默认设置的是fluentd収集/var/log/nginx/access.log日志。    
 
-リンク
+工具地址
 -----
 + [elasticsearch](http://www.elasticsearch.org/)
  - plugin [bigdesk](https://github.com/lukas-vlcek/bigdesk/)
@@ -117,3 +102,4 @@ $ find ./  |xargs grep -n es-server
 + [kibana3](http://three.kibana.org/)
 + [fluentd](http://fluentd.org/)
 + [nginx](http://nginx.org/ja/)
+

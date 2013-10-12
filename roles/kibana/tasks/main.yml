@@ -5,7 +5,7 @@
     - git
 
 - name: install kibana
-  git: repo=https://github.com/elasticsearch/kibana.git dest={{ kibana_dir }} update=yes
+  git: repo=git://github.com/elasticsearch/kibana.git dest={{ kibana_dir }} update=yes
 
 - name: Copy config
   template: src=config.js dest={{ kibana_dir }}/config.js mode=0644
