@@ -8,7 +8,7 @@ fluentd...日志收集系统
 
 ansible...自动化管理工具  
 
-対象環境
+系统环境
 -----
 CentOS 5.8 64bit 
 
