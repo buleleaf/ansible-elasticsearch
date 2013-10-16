@@ -1,0 +1,413 @@
+{
+  "title": "web1",
+  "services": {
+    "query": {
+      "idQueue": [],
+      "list": {
+        "0": {
+          "query": "code:304",
+          "alias": "304",
+          "color": "#7EB26D",
+          "id": 0,
+          "pin": false,
+          "type": "lucene"
+        },
+        "1": {
+          "id": 1,
+          "color": "#EAB839",
+          "query": "code:200",
+          "alias": "200",
+          "pin": false,
+          "type": "lucene"
+        },
+        "2": {
+          "id": 2,
+          "color": "#6ED0E0",
+          "query": "code:400",
+          "alias": "400",
+          "pin": false,
+          "type": "lucene"
+        },
+        "3": {
+          "id": 3,
+          "color": "#EF843C",
+          "query": "code:500",
+          "alias": "500",
+          "pin": false,
+          "type": "lucene"
+        }
+      },
+      "ids": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "filter": {
+      "idQueue": [
+        1
+      ],
+      "list": {
+        "0": {
+          "type": "time",
+          "field": "@timestamp",
+          "from": "now-24h",
+          "to": "now",
+          "mandate": "must",
+          "active": true,
+          "alias": "",
+          "id": 0
+        }
+      },
+      "ids": [
+        0
+      ]
+    }
+  },
+  "rows": [{
+    "title": "text",
+    "height": "70px",
+    "editable": true,
+    "collapse": false,
+    "collapsable": true,
+    "panels": [{
+      "error": false,
+      "span": 9,
+      "editable": true,
+      "type": "text",
+      "loadingEditor": false,
+      "status": "Stable",
+      "mode": "markdown",
+      "content": "aaa",
+      "style": {},
+      "title": "the dashboard"
+    }, {
+      "span": 3,
+      "editable": true,
+      "type": "hits",
+      "loadingEditor": false,
+      "queries": {
+        "mode": "all",
+        "ids": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "style": {
+        "font-size": "24pt"
+      },
+      "arrangement": "horizontal",
+      "chart": "total",
+      "counter_pos": "above",
+      "donut": false,
+      "tilt": false,
+      "labels": true,
+      "spyable": true,
+      "title": "Total"
+    }],
+    "notice": false
+  }, {
+    "title": "code",
+    "height": "350px",
+    "editable": true,
+    "collapse": false,
+    "collapsable": true,
+    "panels": [{
+      "span": 7,
+      "editable": true,
+      "group": [
+        "default"
+      ],
+      "type": "histogram",
+      "mode": "count",
+      "time_field": "@timestamp",
+      "value_field": null,
+      "auto_int": true,
+      "resolution": 100,
+      "interval": "10m",
+      "fill": 3,
+      "linewidth": 3,
+      "timezone": "browser",
+      "spyable": true,
+      "zoomlinks": true,
+      "bars": true,
+      "stack": true,
+      "points": false,
+      "lines": false,
+      "legend": true,
+      "x-axis": true,
+      "y-axis": true,
+      "percentage": false,
+      "interactive": true,
+      "queries": {
+        "mode": "all",
+        "ids": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "title": "Events over time",
+      "intervals": [
+        "auto",
+        "1s",
+        "1m",
+        "5m",
+        "10m",
+        "30m",
+        "1h",
+        "3h",
+        "12h",
+        "1d",
+        "1w",
+        "1M",
+        "1y"
+      ],
+      "options": true,
+      "tooltip": {
+        "value_type": "cumulative",
+        "query_as_alias": false
+      }
+    }, {
+      "span": 5,
+      "editable": true,
+      "type": "hits",
+      "loadingEditor": false,
+      "queries": {
+        "mode": "all",
+        "ids": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "style": {
+        "font-size": "10pt"
+      },
+      "arrangement": "horizontal",
+      "chart": "bar",
+      "counter_pos": "above",
+      "donut": false,
+      "tilt": false,
+      "labels": true,
+      "spyable": true,
+      "title": "code"
+    }],
+    "notice": false
+  }, {
+    "title": "Events",
+    "height": "350px",
+    "editable": true,
+    "collapse": false,
+    "collapsable": true,
+    "panels": [{
+      "title": "All events",
+      "error": false,
+      "span": 7,
+      "editable": true,
+      "group": [
+        "default"
+      ],
+      "type": "table",
+      "size": 10,
+      "pages": 5,
+      "offset": 0,
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "style": {
+        "font-size": "9pt"
+      },
+      "overflow": "min-height",
+      "fields": [
+        "code",
+        "host",
+        "path",
+        "@log_name"
+      ],
+      "highlight": [],
+      "sortable": true,
+      "header": true,
+      "paging": true,
+      "spyable": true,
+      "queries": {
+        "mode": "all",
+        "ids": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "field_list": true,
+      "status": "Stable",
+      "trimFactor": 300,
+      "normTimes": true
+    }, {
+      "error": false,
+      "span": 5,
+      "editable": true,
+      "type": "column",
+      "loadingEditor": false,
+      "panels": [{
+        "loading": false,
+        "error": false,
+        "sizeable": false,
+        "span": 12,
+        "height": "150px",
+        "editable": true,
+        "type": "filtering",
+        "draggable": false,
+        "title": "aa"
+      }, {
+        "loading": false,
+        "error": false,
+        "sizeable": false,
+        "span": 12,
+        "height": "150px",
+        "editable": true,
+        "type": "pie",
+        "draggable": false,
+        "query": {
+          "field": "code",
+          "goal": 100
+        },
+        "queries": {
+          "mode": "all",
+          "ids": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "size": 10,
+        "exclude": [],
+        "donut": false,
+        "tilt": false,
+        "legend": "above",
+        "labels": true,
+        "mode": "terms",
+        "default_field": "DEFAULT",
+        "spyable": true
+      }, {
+        "loading": false,
+        "sizeable": false,
+        "span": 12,
+        "height": "50px",
+        "editable": true,
+        "type": "trends",
+        "draggable": false,
+        "queries": {
+          "mode": "all",
+          "ids": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "style": {
+          "font-size": "14pt"
+        },
+        "ago": "1d",
+        "arrangement": "vertical",
+        "spyable": true
+      }]
+    }],
+    "notice": true
+  }, {
+    "title": "Map",
+    "height": "250px",
+    "editable": true,
+    "collapse": false,
+    "collapsable": true,
+    "panels": [],
+    "notice": false
+  }],
+  "editable": true,
+  "failover": false,
+  "index": {
+    "interval": "day",
+    "pattern": "[logstash-]YYYY.MM.DD",
+    "default": "NO_TIME_FILTER_OR_INDEX_PATTERN_NOT_MATCHED"
+  },
+  "style": "dark",
+  "panel_hints": true,
+  "pulldowns": [{
+    "type": "query",
+    "collapse": false,
+    "notice": false,
+    "query": "*",
+    "pinned": true,
+    "history": [
+      "code:500",
+      "code:400",
+      "code:200",
+      "code:304",
+      "*",
+      "host:192.168.10.202"
+    ],
+    "remember": 10,
+    "enable": true
+  }, {
+    "type": "filtering",
+    "collapse": true,
+    "notice": true,
+    "enable": true
+  }],
+  "nav": [{
+    "type": "timepicker",
+    "collapse": false,
+    "notice": false,
+    "status": "Stable",
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ],
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "timefield": "@timestamp",
+    "now": true,
+    "filter_id": 0,
+    "enable": true
+  }],
+  "loader": {
+    "save_gist": false,
+    "save_elasticsearch": true,
+    "save_local": true,
+    "save_default": true,
+    "save_temp": true,
+    "save_temp_ttl_enable": true,
+    "save_temp_ttl": "30d",
+    "load_gist": true,
+    "load_elasticsearch": true,
+    "load_elasticsearch_size": 20,
+    "load_local": true,
+    "hide": false
+  },
+  "refresh": "10s"
+}
