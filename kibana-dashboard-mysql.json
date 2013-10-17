@@ -1,5 +1,5 @@
 {
-  "title": "mysql_slow",
+  "title": "mysql",
   "services": {
     "query": {
       "idQueue": [
@@ -49,6 +49,45 @@
     }
   },
   "rows": [{
+    "title": "TEXT",
+    "height": "70px",
+    "editable": true,
+    "collapse": false,
+    "collapsable": true,
+    "panels": [{
+      "error": false,
+      "span": 8,
+      "editable": true,
+      "type": "text",
+      "loadingEditor": false,
+      "status": "Stable",
+      "mode": "markdown",
+      "content": "the test",
+      "style": {}
+    }, {
+      "span": 4,
+      "editable": true,
+      "type": "hits",
+      "loadingEditor": false,
+      "queries": {
+        "mode": "all",
+        "ids": [
+          0
+        ]
+      },
+      "style": {
+        "font-size": "24pt"
+      },
+      "arrangement": "horizontal",
+      "chart": "total",
+      "counter_pos": "above",
+      "donut": false,
+      "tilt": false,
+      "labels": true,
+      "spyable": true
+    }],
+    "notice": false
+  }, {
     "title": "Graph",
     "height": "350px",
     "editable": true,
@@ -250,6 +289,7 @@
       "overflow": "min-height",
       "fields": [
         "user",
+        "host_ip",
         "schema",
         "query_time",
         "lock_time",
