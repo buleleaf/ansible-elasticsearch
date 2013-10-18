@@ -1,0 +1,61 @@
+<source>
+  type tail
+  format apache2
+  path /var/log/nginx/access.log
+  pos_file /var/log/td-agent/nginx.access.pos
+  tag td.mysql.access
+</source>
+
+<source>
+  type tail
+  format syslog
+  path /var/log/messages
+  pos_file /var/log/td-agent/messages.pos
+  tag system.mysql.message
+</source>
+
+<match td.mysql.access>
+  type geoip
+
+  geoip_lookup_key     host
+
+  enable_key_city  city
+  enable_key_latitude  lat
+  enable_key_longitude lon
+
+  remove_tag_prefix    td.
+  add_tag_prefix       es.
+</match>
+
+<match es.mysql.access>
+
+  type forward
+  # output type
+  send_timeout 10s 
+  recover_wait 5s
+  heartbeat_interval 1s
+  phi_threshold 8
+  hard_timeout 10s 
+
+  # primary host
+  <server>
+    name collector
+    host 192.168.200.216
+    port 24224
+    weight 60
+  </server>
+
+  # Failed
+  <secondary>
+    type file
+    path /var/log/fluent/forware-failed
+  </secondary>
+
+  # Buffer Parameters
+  buffer_type memory
+  flush_interval 3s
+
+</match>
+#<source>
+#  type forward
+#</source>
