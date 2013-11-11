@@ -103,3 +103,21 @@ $ find ./  |xargs grep -n es-server
 + [fluentd](http://fluentd.org/)
 + [nginx](http://nginx.org/ja/)
 
+kibana增加中国地图  作者：kindle
+------
+1.将map.cn.js文件放到/panels/map/lib/目录下。
+
+2.修改/panels/map/editor.html
+
+将['world','europe','usa']修改成['world','europe','usa','cn']即可
+
+这时候增加地图的下拉列表里就有个cn名字的地图
+
+增强:
+
+1.增加了台湾地图
+
+2.完善了内部编号和geoip数据库的编号对应关系
+作者地址：http://blog.sectop.org/
+
+
